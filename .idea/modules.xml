@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SmartPlannerFIA.iml" filepath="$PROJECT_DIR$/SmartPlannerFIA.iml" />
+      <module fileurl="file://$PROJECT_DIR$/genetic-algorithm/genetic-algorithm.iml" filepath="$PROJECT_DIR$/genetic-algorithm/genetic-algorithm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/hill-climbing/hill-climbing.iml" filepath="$PROJECT_DIR$/hill-climbing/hill-climbing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/simulated-annealing/simulated-annealing.iml" filepath="$PROJECT_DIR$/simulated-annealing/simulated-annealing.iml" />
+    </modules>
+  </component>
+</project>
