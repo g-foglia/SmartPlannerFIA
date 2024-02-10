@@ -5,15 +5,15 @@ public class Impegno {
     private String nomeImpegno;
     private int durataImpegno;
     private int prioritaImpegno;
-    //private String emailUI;
+
 
 
 //metodo costruttore
-    public Impegno(String nomeImpegno, int durataImpegno, int prioritaImpegno/*, String emailUI*/) {
+    public Impegno(String nomeImpegno, int durataImpegno, int prioritaImpegno) {
         this.nomeImpegno = nomeImpegno;
         this.durataImpegno = durataImpegno;
         this.prioritaImpegno = prioritaImpegno;
-        //this.emailUI = emailUI;
+
     }
 //metodo per restituire il codice dell'impegno
     public int getCodiceImpegno() {
@@ -49,14 +49,8 @@ public class Impegno {
     public void setPrioritaImpegno(int prioritaImpegno) {
         this.prioritaImpegno = prioritaImpegno;
     }
-    /*
-    public String getEmailUI() {
-        return emailUI;
+    public Impegno() {
     }
-
-    public void setEmailUI(String emailUI) {
-        this.emailUI = emailUI;
-    }*/
 
     @Override
     public String toString() {
