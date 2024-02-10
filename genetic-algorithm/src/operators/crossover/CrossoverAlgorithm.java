@@ -15,13 +15,18 @@ public class CrossoverAlgorithm extends CrossoverOperator{
 
         ArrayList<Coppia> coppie = generaCoppieCasuali(popolazione);
         for(Coppia coppia : coppie){
-            Set<Impegno> impegniInseriti = new HashSet<>();
-            Settimana successore = new Settimana();
+            int rigaCrossover = r.nextInt(12);
+            Settimana successore1 = new Settimana();
+            Settimana successore2 = new Settimana();
+
+            successore1 = doCrossover(coppia.genitore1,coppia.genitore2,rigaCrossover);
+            successore2 = doCrossover(coppia.genitore2,coppia.genitore1,rigaCrossover);
+
+            /*Set<Impegno> impegniInseriti = new HashSet<>();
             Set<Impegno> impegniTotali = new HashSet<>();
             for(int i = 0; i < 7; i++)
                 impegniTotali.addAll(coppia.genitore1.getGiorno(i).getImpegni());
 
-            int rigaCrossover = r.nextInt(12);
             //copia nel successore la disposizione di eventi del genitore1 fino alla riga scelta casualmente
             for(int i = 0; i < rigaCrossover; i++){
                 for(int j = 0; j < 7; j++){
@@ -58,12 +63,60 @@ public class CrossoverAlgorithm extends CrossoverOperator{
                         }
                     }
                 }
-            }
-            nuovaPopolazione.add(successore.clona());
+            }*/
+
+            nuovaPopolazione.add(successore1.clona());
+            nuovaPopolazione.add(successore2.clona());
         }
         return nuovaPopolazione;
     }
 
+    private Settimana doCrossover(Settimana genitore1, Settimana genitore2, int rigaCrossover){
+        Set<Impegno> impegniInseriti = new HashSet<>();
+        Settimana successore = new Settimana();
+        Set<Impegno> impegniTotali = new HashSet<>();
+        for(int i = 0; i < 7; i++)
+            impegniTotali.addAll(genitore1.getGiorno(i).getImpegni());
+
+        for(int i = 0; i < rigaCrossover; i++){
+            for(int j = 0; j < 7; j++){
+                String index = (String.valueOf(j) + "." + String.valueOf(i));
+                Impegno impegno = genitore1.getGiorno(j).getImpegnoByFascia(i);
+                if(!impegniInseriti.contains(impegno) && impegno != null) {
+                    successore.setImpegno(impegno, index);
+                    impegniInseriti.add(impegno);
+                }
+            }
+        }
+
+        //copia nel successore la disposizione di eventi del genitore2 a partire dalla riga scelta casualmente
+        for(int i = rigaCrossover; i < 12; i++){
+            for(int j = 0; j < 7; j++){
+                String index = (String.valueOf(j) + "." + String.valueOf(i));
+                Impegno impegno = genitore2.getGiorno(j).getImpegnoByFascia(i);
+                if(!impegniInseriti.contains(impegno) && impegno != null) {
+                    successore.setImpegno(impegno, index);
+                    impegniInseriti.add(impegno);
+                }
+            }
+        }
+
+        if(!impegniInseriti.equals(impegniTotali)){
+            Random r = new Random();
+            for(Impegno impegno : impegniTotali){
+                boolean continua = true;
+                while(continua){
+                    int giorno = r.nextInt(7);
+                    int fascia = r.nextInt(12);
+                    if(successore.getGiorno(giorno).getImpegnoByFascia(fascia) == null){
+                        successore.setImpegno(impegno,(String.valueOf(giorno) + "." + String.valueOf(fascia)));
+                        continua = false;
+                    }
+                }
+            }
+        }
+        return successore;
+    }
 
     private class Coppia {
         protected final Settimana genitore1;

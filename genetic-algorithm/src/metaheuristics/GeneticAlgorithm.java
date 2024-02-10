@@ -13,10 +13,12 @@ import results.Results;
 import java.util.*;
 
 public class GeneticAlgorithm {
+    private final static int scrambleSize = 5;
+    private final static int truncationSize = 5;
     private final FitnessFunction fitnessFunction;
     private final RandomInitializer initializer;
-    //private final TruncationSelection selectionOperator;
-    private final RouletteWheelSelection selectionOperator;
+    private final TruncationSelection selectionOperator;
+    //private final RouletteWheelSelection selectionOperator;
     private final CrossoverOperator crossoverOperator;
     private final ScrambleMutation mutationOperator;
     //private final SwapMutation mutationOperator;
@@ -25,7 +27,7 @@ public class GeneticAlgorithm {
     private final int maxIterationsNoImprovements;
 
     public GeneticAlgorithm(FitnessFunction fitnessFunction, RandomInitializer randomInitializer,
-    /*TruncationSelection*/ RouletteWheelSelection selectionOperator, CrossoverOperator crossoverOperator,
+    TruncationSelection /*RouletteWheelSelection*/ selectionOperator, CrossoverOperator crossoverOperator,
     /*SwapMutation*/        ScrambleMutation mutationOperator, double probabilitaMutazione,
                             int maxIterations, int maxIterationsNoImprovements){
         this.fitnessFunction = fitnessFunction;
@@ -38,7 +40,7 @@ public class GeneticAlgorithm {
         else
             this.probabilitaMutazione = 0.1;
         this.maxIterations = Math.max(maxIterations,1);
-        this.maxIterationsNoImprovements = Math.max(maxIterationsNoImprovements,1);
+        this.maxIterationsNoImprovements = Math.max(maxIterationsNoImprovements,0);
     }
 
     public Results run(){
@@ -57,22 +59,22 @@ public class GeneticAlgorithm {
         log.add("Gen 1) " + (totFitness /primaGenerazione.size()) + " (CurrentAvg)");
         ArrayList<Settimana> miglioreGenerazione = primaGenerazione;
 
-        int iterations = 0;
+        int iterations = 1;
         int iterationsNoImprovements = 0;
         boolean maxNoImprovementsExceeded = false;
         do{
             StringBuilder logEntry = new StringBuilder();
             ArrayList<Settimana> generazioneCorrente = generazioni.peek();
 
-            ArrayList<Settimana> matingPool = selectionOperator.selection(generazioneCorrente, r);
-          //ArrayList<Settimana> matingPool = selectionOperator.selection(generazioneCorrente, r);
+            //ArrayList<Settimana> matingPool = selectionOperator.selection(generazioneCorrente, r);
+            ArrayList<Settimana> matingPool = selectionOperator.selection(generazioneCorrente, truncationSize);
 
             ArrayList<Settimana> offsprings = crossoverOperator.crossover(matingPool, r);
 
             ArrayList<Settimana> nuovaGenerazione = new ArrayList<>();
             if(r.nextDouble() <= probabilitaMutazione){
                 for(Settimana settimana : offsprings)
-                    nuovaGenerazione.add(mutationOperator.mutation(settimana, 5));    //5 è il numero di geni che verranno permutati
+                    nuovaGenerazione.add(mutationOperator.mutation(settimana, scrambleSize));
                   //nuovaGenerazione.add(mutationOperator.mutation(settimana));
             }
             else nuovaGenerazione = offsprings;
@@ -94,8 +96,31 @@ public class GeneticAlgorithm {
 
             logEntry.append(nuovoFitnessMedio).append(" vs ").append(bestFitnessMedio).append(" (NewAvg vs BestAvg)");
 
-
-
+            if(nuovoFitnessMedio < bestFitnessMedio){
+                miglioreGenerazione = nuovaGenerazione;
+                iterationsNoImprovements = 0;
+                logEntry.append(" ==> Improvement");
+            }
+            else{
+                iterationsNoImprovements++;
+                maxNoImprovementsExceeded = (0 < maxIterationsNoImprovements && maxIterationsNoImprovements < iterationsNoImprovements);
+                if(maxNoImprovementsExceeded)
+                    logEntry.append(" ==> Early Stop");
+            }
+            log.add(logEntry.toString());
         }while (iterations < maxIterations && !maxNoImprovementsExceeded);
+        return new Results(this,generazioni,miglioreGenerazione,log);
+    }
+
+    public double getProbabilitaMutazione() {
+        return probabilitaMutazione;
+    }
+
+    public int getMaxIterations() {
+        return maxIterations;
+    }
+
+    public int getMaxIterationsNoImprovements() {
+        return maxIterationsNoImprovements;
     }
 }

@@ -19,7 +19,13 @@ public class TruncationSelection{
             }
         });
 
-        ArrayList<Settimana> nuovaPopolazione = new ArrayList<>(temp.subList(0,size));
-        return nuovaPopolazione;
+        if(temp.size() < size){
+            ArrayList<Settimana> nuovaPopolazione = new ArrayList<>(temp);
+            return nuovaPopolazione;
+        }
+        else {
+            ArrayList<Settimana> nuovaPopolazione = new ArrayList<>(temp.subList(0,size));
+            return nuovaPopolazione;
+        }
     }
 }

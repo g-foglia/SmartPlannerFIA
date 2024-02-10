@@ -32,7 +32,7 @@ public class RouletteWheelSelection{
         ArrayList<Elemento> rouletteWheel = new ArrayList<>();
         double posizioneCorrente = 0.0;
         for(Settimana settimana : popolazione){
-            double fitnessRelativa = settimana.getFitness() / totalFitness;
+            double fitnessRelativa = (double) settimana.getFitness() / totalFitness;
             Elemento elemento = new Elemento(settimana,posizioneCorrente,fitnessRelativa);
             rouletteWheel.add(elemento);
             posizioneCorrente += fitnessRelativa;
