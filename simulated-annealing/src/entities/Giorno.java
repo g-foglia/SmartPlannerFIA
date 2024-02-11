@@ -17,7 +17,7 @@ public class Giorno {
 
     }
 
-    public void setImpegni(Impegno impegno, int fascia){
+    public void setImpegno(Impegno impegno, int fascia){
         impegni.set(fascia, impegno);
     }
 
