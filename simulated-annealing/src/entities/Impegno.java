@@ -8,6 +8,8 @@ public class Impegno {
     private int prioritaImpegno;
 
 
+    public Impegno(){}
+
     public Impegno(String nomeImpegno, int durataImpegno, int prioritaImpegno){
 
         this.nomeImpegno = nomeImpegno;
