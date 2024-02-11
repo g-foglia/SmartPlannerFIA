@@ -19,7 +19,7 @@ public class FitnessFunction {
             int bonusg = settimana.getGiorno(i).getTotalBen();
             int malusg = settimana.getGiorno(i).getTotalMalus();
 
-            totale += (totg - bonusg - malusg);
+            totale += (totg - bonusg + malusg);
         }
         return totale;
     }
