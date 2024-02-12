@@ -66,16 +66,16 @@ public class GeneticAlgorithm {
             StringBuilder logEntry = new StringBuilder();
             ArrayList<Settimana> generazioneCorrente = generazioni.peek();
 
-            //ArrayList<Settimana> matingPool = selectionOperator.selection(generazioneCorrente, r);
-            ArrayList<Settimana> matingPool = selectionOperator.selection(generazioneCorrente, truncationSize);
+            //ArrayList<Settimana> matingPool = selectionOperator.selection(generazioneCorrente, r);   //roulette wheel
+            ArrayList<Settimana> matingPool = selectionOperator.selection(generazioneCorrente, truncationSize); //truncation
 
             ArrayList<Settimana> offsprings = crossoverOperator.crossover(matingPool, r);
 
             ArrayList<Settimana> nuovaGenerazione = new ArrayList<>();
             if(r.nextDouble() <= probabilitaMutazione){
                 for(Settimana settimana : offsprings)
-                    //nuovaGenerazione.add(mutationOperator.mutation(settimana, scrambleSize));
-                    nuovaGenerazione.add(mutationOperator.mutation(settimana));
+                    //nuovaGenerazione.add(mutationOperator.mutation(settimana, scrambleSize)); //scramble
+                    nuovaGenerazione.add(mutationOperator.mutation(settimana)); //swap
             }
             else nuovaGenerazione = offsprings;
 

@@ -1,5 +1,8 @@
 import entities.Impegno;
 import entities.Settimana;
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class SimulatedAnnealing {
@@ -43,37 +46,54 @@ public class SimulatedAnnealing {
 
     private static Settimana createSettimana(){
         Settimana settimana = new Settimana();
+        ArrayList<Impegno> impegni = new ArrayList<>();
 
         //la somma totale delle priorità è 76 e l'ottimo globale ha punteggio 0
-        settimana.setImpegno(new Impegno("pingpong",60,3),"0.0");
-        settimana.setImpegno(new Impegno("videogiochi",60,1),"0.1");
-        settimana.setImpegno(new Impegno("lavoro",60,4),"0.2");
-        settimana.setImpegno(new Impegno("fitness",60,2),"0.3");
-        settimana.setImpegno(new Impegno("calcio",60,1),"0.4");
-        settimana.setImpegno(new Impegno("riposo",60,1),"0.5");
-        settimana.setImpegno(new Impegno("videocall",60,5),"0.6");
-        settimana.setImpegno(new Impegno("danza",60,4),"0.7");
-        settimana.setImpegno(new Impegno("palestra",60,2),"0.8");
-        settimana.setImpegno(new Impegno("yoga",60,6),"0.9");
-        settimana.setImpegno(new Impegno("biliardo",60,5),"0.10");
-        settimana.setImpegno(new Impegno("pallavolo",60,1),"0.11");
-        settimana.setImpegno(new Impegno("bar",60,3),"1.0");
-        settimana.setImpegno(new Impegno("shopping",60,1),"1.1");
-        settimana.setImpegno(new Impegno("mare",60,4),"1.2");
-        settimana.setImpegno(new Impegno("youtube",60,2),"1.3");
-        settimana.setImpegno(new Impegno("tiktok",60,1),"1.4");
-        settimana.setImpegno(new Impegno("instagram",60,1),"1.5");
-        settimana.setImpegno(new Impegno("x",60,5),"1.6");
-        settimana.setImpegno(new Impegno("threads",60,4),"1.7");
-        settimana.setImpegno(new Impegno("corso di aggiornamento",60,2),"1.8");
-        settimana.setImpegno(new Impegno("pilates",60,6),"1.9");
-        settimana.setImpegno(new Impegno("pittura",60,5),"1.10");
-        settimana.setImpegno(new Impegno("pattinaggio",60,1),"1.11");
-        settimana.setImpegno(new Impegno("baseball",60,1),"2.0");
-        settimana.setImpegno(new Impegno("football",60,2),"2.1");
-        settimana.setImpegno(new Impegno("rugby",60,1),"2.2");
-        settimana.setImpegno(new Impegno("musica",60,2),"2.3");
+        impegni.add(new Impegno("pingpong",60,3));
+        impegni.add(new Impegno("videogiochi",60,1));
+        impegni.add(new Impegno("lavoro",60,4));
+        impegni.add(new Impegno("fitness",60,2));
+        impegni.add(new Impegno("calcio",60,1));
+        impegni.add(new Impegno("riposo",60,1));
+        impegni.add(new Impegno("videocall",60,5));
+        impegni.add(new Impegno("danza",60,4));
+        impegni.add(new Impegno("palestra",60,2));
+        impegni.add(new Impegno("yoga",60,6));
+        impegni.add(new Impegno("biliardo",60,5));
+        impegni.add(new Impegno("pallavolo",60,1));
+        impegni.add(new Impegno("bar",60,3));
+        impegni.add(new Impegno("shopping",60,1));
+        impegni.add(new Impegno("mare",60,4));
+        impegni.add(new Impegno("youtube",60,2));
+        impegni.add(new Impegno("tiktok",60,1));
+        impegni.add(new Impegno("instagram",60,1));
+        impegni.add(new Impegno("x",60,5));
+        impegni.add(new Impegno("threads",60,4));
+        impegni.add(new Impegno("corso di aggiornamento",60,2));
+        impegni.add(new Impegno("pilates",60,6));
+        impegni.add(new Impegno("pittura",60,5));
+        impegni.add(new Impegno("pattinaggio",60,1));
+        impegni.add(new Impegno("baseball",60,1));
+        impegni.add(new Impegno("football",60,2));
+        impegni.add(new Impegno("rugby",60,1));
+        impegni.add(new Impegno("musica",60,2));
 
+        Collections.shuffle(impegni);
+        boolean continua;
+
+        for(Impegno impegno : impegni){
+            continua = true;
+            while(continua) {
+                String index = getRandomIndex();
+                int giorno = Integer.parseInt(index.substring(0, 1));
+                int fascia = Integer.parseInt(index.substring(2));
+
+                if (settimana.getGiorno(giorno).getImpegnoByFascia(fascia) == null) {
+                    settimana.setImpegno(impegno, index);
+                    continua = false;
+                }
+            }
+        }
         return settimana;
     }
 
