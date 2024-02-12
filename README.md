@@ -1,4 +1,6 @@
 # Smart Planner 
+![logofia](https://github.com/g-foglia/SmartPlannerFIA/assets/145924139/4c6c769f-b89d-4223-a109-42370d2f6baa)
+
 ## Team
 I membri del team sono: 
 - [Silvana Cafaro](https://github.com/zzzzilv)
@@ -26,5 +28,6 @@ La cartella "genetic-algorithm" ha una struttura più complessa:
 - **"src/initializers"** contiene la classe che inizializza la popolazione;
 - **"src/operators"** contiene tre ulteriori sotto cartelle che ospitano le classi che realizzano gli operatori genetici di selezione, crossover e mutazione;
 - **"src/results"** contiene la classe che formatta i risultati dell'esecuzione dell'algoritmo;
-- **"src/metaheuristics"** contiene la classe che riceve i parametri e gli operatori, per poi eeguire effettivamente l'algoritmo e restituire i risultati;
+- **"src/metaheuristics"** contiene la classe che riceve i parametri e gli operatori, per poi eseguire effettivamente l'algoritmo e restituire i risultati;
 - **"src/Runner.java"** è la classe che imposta i parametri, manda in esecuzione l'algoritmo e infine stampa i risultati ottenuti.  
+## Come replicare il progetto
