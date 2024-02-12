@@ -47,7 +47,7 @@ public class HillClimbing {
         impegni.add(new Impegno("videocall",60,5));
         impegni.add(new Impegno("danza",60,4));
         impegni.add(new Impegno("palestra",60,2));
-        impegni.add(new Impegno("yoga",60,6));
+        impegni.add(new Impegno("yoga",60,5));
         impegni.add(new Impegno("biliardo",60,5));
         impegni.add(new Impegno("pallavolo",60,1));
         impegni.add(new Impegno("bar",60,3));
@@ -59,7 +59,7 @@ public class HillClimbing {
         impegni.add(new Impegno("x",60,5));
         impegni.add(new Impegno("threads",60,4));
         impegni.add(new Impegno("corso di aggiornamento",60,2));
-        impegni.add(new Impegno("pilates",60,6));
+        impegni.add(new Impegno("pilates",60,5));
         impegni.add(new Impegno("pittura",60,5));
         impegni.add(new Impegno("pattinaggio",60,1));
         impegni.add(new Impegno("baseball",60,1));
