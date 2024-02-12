@@ -34,7 +34,7 @@ La cartella "genetic-algorithm" ha una struttura più complessa:
 ## Come replicare il progetto
 Per replicare il progetto è necessario scaricarlo da GitHub e aprirlo con un IDE che supporti il linguaggio Java e lo JDK 17 o successivi.
 
-Gli algoritmi sono inizializzati con 28 impegni di prova, che si trovano nei file "simulated-annealing/src/SimulatedAnnealing.java", "hill-climbing/src/HillClimbing.java" e "genetic-algorithm/src/initializers/RandomInitializer.java". Ogni impegno ha associato un numero che rappresenta la sua priorità ed è usato per il calcolo della bontà di ogni soluzione. Aggiungere o rimuovvere impegni in questi file (usando gli stessi metodi già codificati per gli altri) è l'unico modo per modificare i dati su cui gli algoritmi operano. 
+Gli algoritmi sono inizializzati con 28 impegni di prova, che si trovano nei file "simulated-annealing/src/SimulatedAnnealing.java", "hill-climbing/src/HillClimbing.java" e "genetic-algorithm/src/initializers/RandomInitializer.java". Ogni impegno ha associato un numero che rappresenta la sua priorità ed è usato per il calcolo della bontà di ogni soluzione. Aggiungere o rimuovere impegni in questi file (usando gli stessi metodi già codificati per gli altri) è l'unico modo per modificare i dati su cui gli algoritmi operano. 
 
 Per l'algoritmo genetico sono stati implementati due operatori di selezione e due operatori di mutazione. Per modificare la combinazione di operatori e parametri usata bisogna agire sulle classi "genetic-algorithm/src/metaheuristics/GeneticAlgorithm.java" e "genetic-algorithm/src/Runner.java". In entrambe sono presenti tutte le righe di codice necessarie, con gli operatori inusati racchiusi in commenti. 
 In particolare per "GeneticAlgorithm.java" le righe interessate sono:
