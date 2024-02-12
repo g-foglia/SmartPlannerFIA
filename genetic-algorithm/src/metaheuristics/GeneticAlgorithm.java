@@ -13,22 +13,22 @@ import results.Results;
 import java.util.*;
 
 public class GeneticAlgorithm {
-    private final static int scrambleSize = 5;
-    private final static int truncationSize = 5;
+    private final static int scrambleSize = 5;  //numero di geni che saranno permutati nella scramble mutation
+    private final static int truncationSize = 5;  //size della nuova popolazione dopo truncation selection
     private final FitnessFunction fitnessFunction;
     private final RandomInitializer initializer;
     private final TruncationSelection selectionOperator;
     //private final RouletteWheelSelection selectionOperator;
     private final CrossoverOperator crossoverOperator;
-    private final ScrambleMutation mutationOperator;
-    //private final SwapMutation mutationOperator;
+    //private final ScrambleMutation mutationOperator;
+    private final SwapMutation mutationOperator;
     private final double probabilitaMutazione;
     private final int maxIterations;
     private final int maxIterationsNoImprovements;
 
     public GeneticAlgorithm(FitnessFunction fitnessFunction, RandomInitializer randomInitializer,
     TruncationSelection /*RouletteWheelSelection*/ selectionOperator, CrossoverOperator crossoverOperator,
-    /*SwapMutation*/        ScrambleMutation mutationOperator, double probabilitaMutazione,
+    SwapMutation        /*ScrambleMutation*/ mutationOperator, double probabilitaMutazione,
                             int maxIterations, int maxIterationsNoImprovements){
         this.fitnessFunction = fitnessFunction;
         this.initializer = randomInitializer;
@@ -74,8 +74,8 @@ public class GeneticAlgorithm {
             ArrayList<Settimana> nuovaGenerazione = new ArrayList<>();
             if(r.nextDouble() <= probabilitaMutazione){
                 for(Settimana settimana : offsprings)
-                    nuovaGenerazione.add(mutationOperator.mutation(settimana, scrambleSize));
-                  //nuovaGenerazione.add(mutationOperator.mutation(settimana));
+                    //nuovaGenerazione.add(mutationOperator.mutation(settimana, scrambleSize));
+                    nuovaGenerazione.add(mutationOperator.mutation(settimana));
             }
             else nuovaGenerazione = offsprings;
 

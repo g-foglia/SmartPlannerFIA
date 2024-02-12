@@ -13,7 +13,7 @@ import results.Results;
 public class Runner {
     public static void main(String[] args){
 
-        final int numeroIndividui = 2;
+        final int numeroIndividui = 20;
         final double probabilitaMutazione = 1;
         final int maxIterations = 1000;
         final int maxIterazionsNoImprovements = 0;
@@ -26,8 +26,8 @@ public class Runner {
 
         CrossoverOperator crossoverOperator = new CrossoverAlgorithm();
 
-        ScrambleMutation mutationOperator = new ScrambleMutation();
-        //SwapMutation mutationOperator = new SwapMutation();
+        //ScrambleMutation mutationOperator = new ScrambleMutation();
+        SwapMutation mutationOperator = new SwapMutation();
 
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(fitnessFunction, initializer,
                 selectionOperator, crossoverOperator, mutationOperator, probabilitaMutazione, maxIterations, maxIterazionsNoImprovements);
