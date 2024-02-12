@@ -2,28 +2,16 @@ package entities;
 
 public class Impegno {
 
-    private int codiceImpegno;
     private String nomeImpegno;
-    private int durataImpegno;
     private int prioritaImpegno;
-
 
     public Impegno(){}
 
-    public Impegno(String nomeImpegno, int durataImpegno, int prioritaImpegno){
+    public Impegno(String nomeImpegno, int prioritaImpegno){
 
         this.nomeImpegno = nomeImpegno;
-        this.durataImpegno = durataImpegno;
         this.prioritaImpegno = prioritaImpegno;
 
-    }
-
-    public void setCodiceImpegno(int codiceImpegno){
-        this.codiceImpegno = codiceImpegno;
-    }
-
-    public void setDurataImpegno(int durataImpegno){
-        this.durataImpegno = durataImpegno;
     }
 
     public void setNomeImpegno(String nomeImpegno){
@@ -32,14 +20,6 @@ public class Impegno {
 
     public void setPrioritaImpegno(int prioritaImpegno){
         this.prioritaImpegno = prioritaImpegno;
-    }
-
-    public int getCodiceImpegno(){
-        return codiceImpegno;
-    }
-
-    public int getDurataImpegno(){
-        return durataImpegno;
     }
 
     public String getNomeImpegno(){
