@@ -17,7 +17,7 @@ public class SimulatedAnnealing {
         long inizio = System.currentTimeMillis();
 
         for(double t = temperature; t > 1; t *= coolingFactor, i++){
-            //creo un vicino andando a scambiare di posizione in maniera casuale due impegni
+            //creo un successore andando a scambiare di posizione in maniera casuale due impegni
             Settimana vicino = attuale.clona();
 
             String index1 = getRandomIndex();
