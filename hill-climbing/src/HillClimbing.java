@@ -44,17 +44,6 @@ public class HillClimbing {
                     continua = false;
             }
         }
-
-        /*while(attuale.getTotalScore() >= vicino.getTotalScore()){
-            i++;
-            //creo un vicino andando a scambiare di posizione in maniera casuale due impegni
-            String index1 = getRandomIndex();
-            String index2 = getRandomIndex();
-            vicino.swap(index1,index2);
-
-            if(attuale.getTotalScore() >= vicino.getTotalScore())
-                attuale = vicino.clona();
-        }*/
         long fine = System.currentTimeMillis();
 
         System.out.println("Numero iterazioni: " + i + "\n");
