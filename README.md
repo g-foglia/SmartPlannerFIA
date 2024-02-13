@@ -1,6 +1,6 @@
 # Smart Planner
 
-<img src="https://github.com/g-foglia/SmartPlannerFIA/assets/145924139/4c6c769f-b89d-4223-a109-42370d2f6baa" width=250>
+<img src="https://github.com/g-foglia/SmartPlannerFIA/assets/145924139/4c6c769f-b89d-4223-a109-42370d2f6baa" width=250 align=center>
 
 ## Team
 I membri del team sono: 
