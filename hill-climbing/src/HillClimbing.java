@@ -27,7 +27,7 @@ public class HillClimbing {
             if(attuale.getTotalScore() >= vicino.getTotalScore()) {
                 attuale = vicino.clona();
             }
-            //per per altre 1000 volte cerca di trovare un vicino migliore, altrimenti ferma la ricerca
+            //per altre 1000 volte cerca di trovare un vicino migliore, altrimenti ferma la ricerca
             else{
                 int j;
                 for(j = 0; j < 1000; j++){
