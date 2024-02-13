@@ -1,7 +1,7 @@
 # Smart Planner
-
+<p align=center>
 <img src="https://github.com/g-foglia/SmartPlannerFIA/assets/145924139/4c6c769f-b89d-4223-a109-42370d2f6baa" width=250 >
-
+</p>
 ## Team
 I membri del team sono: 
 - [Silvana Cafaro](https://github.com/zzzzilv)
