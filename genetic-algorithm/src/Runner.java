@@ -17,6 +17,7 @@ public class Runner {
         final double probabilitaMutazione = 1;
         final int maxIterations = 1000;
         final int maxIterazionsNoImprovements = 0;
+        long inizio = System.currentTimeMillis();
 
         FitnessFunction fitnessFunction = new FitnessFunction();
         RandomInitializer initializer = new RandomInitializer(numeroIndividui);
@@ -32,10 +33,12 @@ public class Runner {
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(fitnessFunction, initializer,
                 selectionOperator, crossoverOperator, mutationOperator, probabilitaMutazione, maxIterations, maxIterazionsNoImprovements);
         Results results = geneticAlgorithm.run();
+
+        long fine = System.currentTimeMillis();
         Settimana miglioreIndividuo = results.getMigliorIndividuo();
         results.getLog().forEach(System.out::println);
         System.out.println("Ricerca terminata in " + results.getNumeroIterazioni() +"/" +
-                geneticAlgorithm.getMaxIterations() + " iterazioni");
+                geneticAlgorithm.getMaxIterations() + " iterazioni e in " + (fine - inizio) + " millisecondi");
         System.out.println("Miglior individuo: ");
         System.out.println(miglioreIndividuo);
         System.out.println("Fitness = " + miglioreIndividuo.getFitness());
