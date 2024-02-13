@@ -16,54 +16,11 @@ public class CrossoverAlgorithm extends CrossoverOperator{
         ArrayList<Coppia> coppie = generaCoppieCasuali(popolazione);
         for(Coppia coppia : coppie){
             int rigaCrossover = r.nextInt(12);
-            Settimana successore1 = new Settimana();
-            Settimana successore2 = new Settimana();
+            Settimana successore1;
+            Settimana successore2;
 
             successore1 = doCrossover(coppia.genitore1,coppia.genitore2,rigaCrossover);
             successore2 = doCrossover(coppia.genitore2,coppia.genitore1,rigaCrossover);
-
-            /*Set<Impegno> impegniInseriti = new HashSet<>();
-            Set<Impegno> impegniTotali = new HashSet<>();
-            for(int i = 0; i < 7; i++)
-                impegniTotali.addAll(coppia.genitore1.getGiorno(i).getImpegni());
-
-            //copia nel successore la disposizione di eventi del genitore1 fino alla riga scelta casualmente
-            for(int i = 0; i < rigaCrossover; i++){
-                for(int j = 0; j < 7; j++){
-                    String index = (String.valueOf(j) + "." + String.valueOf(i));
-                    Impegno impegno = coppia.genitore1.getGiorno(j).getImpegnoByFascia(i);
-                    if(!impegniInseriti.contains(impegno) && impegno != null) {
-                        successore.setImpegno(impegno, index);
-                        impegniInseriti.add(impegno);
-                    }
-                }
-            }
-
-            //copia nel successore la disposizione di eventi del genitore2 a partire dalla riga scelta casualmente
-            for(int i = rigaCrossover; i < 12; i++){
-                for(int j = 0; j < 7; j++){
-                    String index = (String.valueOf(j) + "." + String.valueOf(i));
-                    Impegno impegno = coppia.genitore2.getGiorno(j).getImpegnoByFascia(i);
-                    if(!impegniInseriti.contains(impegno) && impegno != null) {
-                        successore.setImpegno(impegno, index);
-                        impegniInseriti.add(impegno);
-                    }
-                }
-            }
-
-            if(!impegniInseriti.equals(impegniTotali)){
-                for(Impegno impegno : impegniTotali){
-                    boolean continua = true;
-                    while(continua){
-                        int giorno = r.nextInt(7);
-                        int fascia = r.nextInt(12);
-                        if(successore.getGiorno(giorno).getImpegnoByFascia(fascia) == null){
-                            successore.setImpegno(impegno,(String.valueOf(giorno) + "." + String.valueOf(fascia)));
-                            continua = false;
-                        }
-                    }
-                }
-            }*/
 
             nuovaPopolazione.add(successore1.clona());
             nuovaPopolazione.add(successore2.clona());
@@ -76,7 +33,9 @@ public class CrossoverAlgorithm extends CrossoverOperator{
         Settimana successore = new Settimana();
         Set<Impegno> impegniTotali = new HashSet<>();
         for(int i = 0; i < 7; i++)
-            impegniTotali.addAll(genitore1.getGiorno(i).getImpegni());
+            for(int j=0; j < 12; j++)
+                if(genitore1.getGiorno(i).getImpegnoByFascia(j) != null)
+                    impegniTotali.add(genitore1.getGiorno(i).getImpegnoByFascia(j));
 
         for(int i = 0; i < rigaCrossover; i++){
             for(int j = 0; j < 7; j++){
@@ -104,13 +63,15 @@ public class CrossoverAlgorithm extends CrossoverOperator{
         if(!impegniInseriti.equals(impegniTotali)){
             Random r = new Random();
             for(Impegno impegno : impegniTotali){
-                boolean continua = true;
-                while(continua){
-                    int giorno = r.nextInt(7);
-                    int fascia = r.nextInt(12);
-                    if(successore.getGiorno(giorno).getImpegnoByFascia(fascia) == null){
-                        successore.setImpegno(impegno,(String.valueOf(giorno) + "." + String.valueOf(fascia)));
-                        continua = false;
+                if(!impegniInseriti.contains(impegno)) {
+                    boolean continua = true;
+                    while (continua) {
+                        int giorno = r.nextInt(7);
+                        int fascia = r.nextInt(12);
+                        if (successore.getGiorno(giorno).getImpegnoByFascia(fascia) == null) {
+                            successore.setImpegno(impegno, (String.valueOf(giorno) + "." + String.valueOf(fascia)));
+                            continua = false;
+                        }
                     }
                 }
             }

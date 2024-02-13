@@ -17,8 +17,8 @@ public class GeneticAlgorithm {
     private final static int truncationSize = 5;  //size della nuova popolazione dopo truncation selection
     private final FitnessFunction fitnessFunction;
     private final RandomInitializer initializer;
-    private final TruncationSelection selectionOperator;
-    //private final RouletteWheelSelection selectionOperator;
+    //private final TruncationSelection selectionOperator;
+    private final RouletteWheelSelection selectionOperator;
     private final CrossoverOperator crossoverOperator;
     //private final ScrambleMutation mutationOperator;
     private final SwapMutation mutationOperator;
@@ -27,7 +27,7 @@ public class GeneticAlgorithm {
     private final int maxIterationsNoImprovements;
 
     public GeneticAlgorithm(FitnessFunction fitnessFunction, RandomInitializer randomInitializer,
-    TruncationSelection /*RouletteWheelSelection*/ selectionOperator, CrossoverOperator crossoverOperator,
+    /*TruncationSelection*/ RouletteWheelSelection selectionOperator, CrossoverOperator crossoverOperator,
     SwapMutation        /*ScrambleMutation*/ mutationOperator, double probabilitaMutazione,
                             int maxIterations, int maxIterationsNoImprovements){
         this.fitnessFunction = fitnessFunction;
@@ -66,8 +66,8 @@ public class GeneticAlgorithm {
             StringBuilder logEntry = new StringBuilder();
             ArrayList<Settimana> generazioneCorrente = generazioni.peek();
 
-            //ArrayList<Settimana> matingPool = selectionOperator.selection(generazioneCorrente, r);   //roulette wheel
-            ArrayList<Settimana> matingPool = selectionOperator.selection(generazioneCorrente, truncationSize); //truncation
+            ArrayList<Settimana> matingPool = selectionOperator.selection(generazioneCorrente, r);   //roulette wheel
+            //ArrayList<Settimana> matingPool = selectionOperator.selection(generazioneCorrente, truncationSize); //truncation
 
             ArrayList<Settimana> offsprings = crossoverOperator.crossover(matingPool, r);
 
