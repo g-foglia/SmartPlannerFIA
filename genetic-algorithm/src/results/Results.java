@@ -1,5 +1,6 @@
 package results;
 
+import fitness.FitnessFunction;
 import individuals.Settimana;
 import metaheuristics.GeneticAlgorithm;
 
@@ -42,10 +43,10 @@ public class Results {
     }
 
     public Settimana getMigliorIndividuo(){
-        return miglioreGenerazione.stream().max(new Comparator<Settimana>() {
+        return miglioreGenerazione.stream().min(new Comparator<Settimana>() {
             @Override
-            public int compare(Settimana settimana11, Settimana settimana1) {
-                return (settimana11.getFitness() - settimana1.getFitness());
+            public int compare(Settimana settimana1, Settimana settimana2) {
+                return (settimana1.getFitness() - settimana2.getFitness());
             }
         }).get();
     }
