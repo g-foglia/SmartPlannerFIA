@@ -11,11 +11,41 @@ public class HillClimbing {
     //sono stati spostati di posizione
     public static void main(String[] args){
         Settimana attuale = createSettimana();
-        Settimana vicino = attuale.clona();
         int i = 0;
+        boolean continua = true;
 
         long inizio = System.currentTimeMillis();
-        while(attuale.getTotalScore() >= vicino.getTotalScore()){
+        while(continua){
+            i++;
+
+            //creo un vicino andando a scambiare di posizione in maniera casuale due impegni
+            Settimana vicino = attuale.clona();
+            String index1 = getRandomIndex();
+            String index2 = getRandomIndex();
+            vicino.swap(index1,index2);
+
+            if(attuale.getTotalScore() >= vicino.getTotalScore()) {
+                attuale = vicino.clona();
+            }
+            //per per altre 1000 volte cerca di trovare un vicino migliore, altrimenti ferma la ricerca
+            else{
+                int j;
+                for(j = 0; j < 1000; j++){
+                    Settimana vicino2 = attuale.clona();
+                    index1 = getRandomIndex();
+                    index2 = getRandomIndex();
+                    vicino2.swap(index1,index2);
+                    if(attuale.getTotalScore() >= vicino.getTotalScore()) {
+                        attuale = vicino.clona();
+                        break;
+                    }
+                }
+                if(j == 1000)
+                    continua = false;
+            }
+        }
+
+        /*while(attuale.getTotalScore() >= vicino.getTotalScore()){
             i++;
             //creo un vicino andando a scambiare di posizione in maniera casuale due impegni
             String index1 = getRandomIndex();
@@ -24,7 +54,7 @@ public class HillClimbing {
 
             if(attuale.getTotalScore() >= vicino.getTotalScore())
                 attuale = vicino.clona();
-        }
+        }*/
         long fine = System.currentTimeMillis();
 
         System.out.println("Numero iterazioni: " + i + "\n");
